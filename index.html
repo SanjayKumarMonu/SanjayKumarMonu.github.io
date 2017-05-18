@@ -13,897 +13,946 @@
 <div class="container">
   <div id="content">
     
-    <p><strong>Coding exercises in C programming Language</strong></p>
-<p><strong>By : Sanjay Kumar Monu</strong></p>
-<p><strong>Question 1</strong></p>
-<p>#include&lt;stdio.h&gt;</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int n;</span></p>
-<p><span lang="zxx">for(n = 7; n!=0; n--)</span></p>
-<p><span lang="zxx">printf("n = %d", n--);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output:Above program goes in infinite loop because n is never zero when loop condition (n != 0) is checked.</p>
-<p><strong>Question 2</strong></p>
-<p>#include&lt;stdio.h&gt;</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">printf("%x", -1&lt;&lt;1);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output is dependent on the compiler. For 32 bit compiler it would be fffffffe and for 16 bit it would be fffe.</p>
-<p><strong>Question 3</strong></p>
-<p># include &lt;stdio.h&gt;</p>
-<p># define scanf "%s Geeks For Geeks "</p>
-<p>main()</p>
-<p>{</p>
-<p><span lang="zxx">printf(scanf, scanf);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: %s Geeks For Geeks Geeks For Geeks<br />Explanation: After pre-processing phase of compilation, printf statement will become.</p>
-<p><span lang="zxx">printf("%s Geeks For Geeks ", "%s Geeks For Geeks ");</span></p>
-<p>Now you can easily guess why output is %s Geeks For Geeks Geeks For Geeks.</p>
-<p><strong>Question 4</strong></p>
-<p>#include &lt;stdlib.h&gt;</p>
-<p>#include &lt;stdio.h&gt;</p>
-<p>enum {false, true};</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int i = 1;</span></p>
-<p><span lang="zxx">do</span></p>
-<p><span lang="zxx">{</span></p>
-<p><span lang="zxx">printf("%d\n", i);</span></p>
-<p><span lang="zxx">i++;</span></p>
-<p><span lang="zxx">if (i &lt; 15)</span></p>
-<p><span lang="zxx">continue;</span></p>
-<p><span lang="zxx">} while (false);</span></p>
-<p><br /><br /></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: 1<br />Explanation: The do wile loop checks condition after each iteration. So after continue statement, control transfers to the statement while(false). Since the condition is false &lsquo;i&rsquo; is printed only once.</p>
-<p>Now try below program.</p>
-<p>#include &lt;stdlib.h&gt;</p>
-<p>#include &lt;stdio.h&gt;</p>
-<p>enum {false, true};</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int i = 1;</span></p>
-<p><span lang="zxx">do</span></p>
-<p><span lang="zxx">{</span></p>
-<p><span lang="zxx">printf("%d\n", i);</span></p>
-<p><span lang="zxx">i++;</span></p>
-<p><span lang="zxx">if (i &lt; 15)</span></p>
-<p><span lang="zxx">break;</span></p>
-<p><span lang="zxx">} while (true);</span></p>
-<p><br /><br /></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p><strong>Question 5</strong></p>
-<p>char *getString()</p>
-<p>{</p>
-<p><span lang="zxx">char *str = "Nice test for strings";</span></p>
-<p><span lang="zxx">return str;</span></p>
-<p>}</p>
-<p><br /><br /></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">printf("%s", getString());</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: &ldquo;Nice test for strings&rdquo;<br />The above program works because string constants are stored in Data Section (not in Stack Section). So, when getString returns *str is not lost.</p>
-<p><strong>Question 1</strong></p>
-<p>char *getString()</p>
-<p>{</p>
-<p><span lang="zxx">char str[] = "Will I be printed?";</span></p>
-<p><span lang="zxx">return str;</span></p>
-<p>}</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">printf("%s", getString());</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p>}</p>
-<p>Output: Some garbage value<br />The above program doesn&rsquo;t work because array variables are stored in Stack Section. So, when getString returns values at str are deleted and str becomes dangling pointer.</p>
-<p><strong>Question 2</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">static int i=5;</span></p>
-<p><span lang="zxx">if(--i){</span></p>
-<p><span lang="zxx">main();</span></p>
-<p><span lang="zxx">printf("%d ",i);</span></p>
-<p><span lang="zxx">}</span></p>
-<p>}</p>
-<p>Output: 0 0 0 0<br />Explanation: Since i is a static variable and is stored in Data Section, all calls to main share same i.</p>
-<p><strong>Question 3</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">static int var = 5;</span></p>
-<p><span lang="zxx">printf("%d ",var--);</span></p>
-<p><span lang="zxx">if(var)</span></p>
-<p><span lang="zxx">main();</span></p>
-<p>}</p>
-<p>Output: 5 4 3 2 1<br />Explanation: Same as previous question. The only difference here is, sequence of calling main and printf is changed, therefore different output.</p>
-<p><strong>Question 4</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int x;</span></p>
-<p><span lang="zxx">printf("%d",scanf("%d",&amp;x));</span></p>
-<p><span lang="zxx">/* Suppose that input value given</span></p>
-<p><span lang="zxx">for above scanf is 20 */</span></p>
-<p><span lang="zxx">return 1;</span></p>
-<p>}</p>
-<p>Output: 1<br />scanf returns the no. of inputs it has successfully read.</p>
-<p><strong>Question 5</strong></p>
-<p># include &lt;stdio.h&gt;</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int i=0;</span></p>
-<p><span lang="zxx">for(i=0; i&lt;20; i++)</span></p>
-<p><span lang="zxx">{</span></p>
-<p><span lang="zxx">switch(i)</span></p>
-<p><span lang="zxx">{</span></p>
-<p><span lang="zxx">case 0:</span></p>
-<p><span lang="zxx">i+=5;</span></p>
-<p><span lang="zxx">case 1:</span></p>
-<p><span lang="zxx">i+=2;</span></p>
-<p><span lang="zxx">case 5:</span></p>
-<p><span lang="zxx">i+=5;</span></p>
-<p><span lang="zxx">default:</span></p>
-<p><span lang="zxx">i+=4;</span></p>
-<p><span lang="zxx">break;</span></p>
-<p><span lang="zxx">}</span></p>
-<p><span lang="zxx">printf("%d ", i);</span></p>
-<p><span lang="zxx">}</span></p>
-<p><br /><br /></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: 16 21<br />Explanation:<br />Initially i = 0. Since case 0 is true i becomes 5, and since there is no break statement till last statement of switch block, i becomes 16. Now in next iteration no case is true, so execution goes to default and i becomes 21.</p>
-<p>In C, if one case is true switch block is executed until it finds break statement. If no break statement is present all cases are executed after the true case. If you want to know why switch is implemented like this, well this implementation is useful for situations like below.</p>
-<p><span lang="zxx">switch (c)</span></p>
-<p><span lang="zxx">{</span></p>
-<p><span lang="zxx">case 'a':</span></p>
-<p><span lang="zxx">case 'e':</span></p>
-<p><span lang="zxx">case 'i' :</span></p>
-<p><span lang="zxx">case 'o':</span></p>
-<p><span lang="zxx">case 'u':</span></p>
-<p><span lang="zxx">printf(" Vowel character");</span></p>
-<p><span lang="zxx">break;</span></p>
-<p><span lang="zxx">default :</span></p>
-<p><span lang="zxx">printf("Not a Vowel character");; break;</span></p>
-<p><span lang="zxx">}</span></p>
-<p><strong>Question 1</strong></p>
-<p>#include &lt;stdio.h&gt;</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">printf("%d", main);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: Address of function main.<br />Explanation: Name of the function is actually a pointer variable to the function and prints the address of the function. Symbol table is implemented like this.</p>
-<p>struct</p>
-<p>{</p>
-<p><span lang="zxx">char *name;</span></p>
-<p><span lang="zxx">int (*funcptr)();</span></p>
-<p>}</p>
-<p>symtab[] = {</p>
-<p><span lang="zxx">"func", func,</span></p>
-<p><span lang="zxx">"anotherfunc", anotherfunc,</span></p>
-<p>};</p>
-<p><strong>Question 2</strong></p>
-<p>#include &lt;stdio.h&gt;</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">printf("\new_c_question\by");</span></p>
-<p><span lang="zxx">printf("\rgeeksforgeeks");</span></p>
-<p><br /><br /></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: geeksforgeeksl<br />Explanation: First printf prints &ldquo;ew_c_questioy&rdquo;. Second printf has \r in it so it goes back to start of the line and starts printing characters.</p>
-<p>Now try to print following without using any of the escape characters.</p>
-<p>new c questions by</p>
-<p>geeksforgeeks</p>
-<p><strong>Question 3</strong></p>
-<p># include&lt;stdio.h&gt;</p>
-<p># include&lt;stdlib.h&gt;</p>
-<p><br /><br /></p>
-<p>void fun(int *a)</p>
-<p>{</p>
-<p><span lang="zxx">a = (int*)malloc(sizeof(int));</span></p>
-<p>}</p>
-<p><br /><br /></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int *p;</span></p>
-<p><span lang="zxx">fun(p);</span></p>
-<p><span lang="zxx">*p = 6;</span></p>
-<p><span lang="zxx">printf("%d\n",*p);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return(0);</span></p>
-<p>}</p>
-<p>It does not work. Try replacing &ldquo;int *p;&rdquo; with &ldquo;int *p = NULL;&rdquo; and it will try to dereference a null pointer.</p>
-<p>This is because fun() makes a copy of the pointer, so when malloc() is called, it is setting the copied pointer to the memory location, not p. p is pointing to random memory before and after the call to fun(), and when you dereference it, it will crash.</p>
-<p>If you want to add memory to a pointer from a function, you need to pass the address of the pointer (ie. double pointer).</p>
-<p>Thanks to John Doe for providing the correct solution.</p>
-<p><strong>Question 4</strong></p>
-<p>#include &lt;stdio.h&gt;</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int i;</span></p>
-<p><span lang="zxx">i = 1, 2, 3;</span></p>
-<p><span lang="zxx">printf("i = %d\n", i);</span></p>
-<p><br /><br /></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: 1<br />The above program prints 1. Associativity of comma operator is from left to right, but = operator has higher precedence than comma operator.<br />Therefore the statement i = 1, 2, 3 is treated as (i = 1), 2, 3 by the compiler.</p>
-<p>Now it should be easy to tell output of below program.</p>
-<p>#include &lt;stdio.h&gt;</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int i;</span></p>
-<p><span lang="zxx">i = (1, 2, 3);</span></p>
-<p><span lang="zxx">printf("i = %d\n", i);</span></p>
-<p><br /><br /></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p><strong>Question 5</strong></p>
-<p>#include &lt;stdio.h&gt;</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int first = 50, second = 60, third;</span></p>
-<p><span lang="zxx">third = first /* Will this comment work? */ + second;</span></p>
-<p><span lang="zxx">printf("%d /* And this? */ \n", third);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: 110 /* And this? */<br />Explanation: Compiler removes everything between &ldquo;/*&rdquo; and &ldquo;*/&rdquo; if they are not present inside double quotes (&ldquo;&rdquo;).</p>
-<p><strong>Question 1</strong></p>
-<p>#include&lsaquo;stdio.h&rsaquo;</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">struct site</span></p>
-<p><span lang="zxx">{</span></p>
-<p><span lang="zxx">char name[] = "GeeksforGeeks";</span></p>
-<p><span lang="zxx">int no_of_pages = 200;</span></p>
-<p><span lang="zxx">};</span></p>
-<p><span lang="zxx">struct site *ptr;</span></p>
-<p><span lang="zxx">printf("%d",ptr-&gt;no_of_pages);</span></p>
-<p><span lang="zxx">printf("%s",ptr-&gt;name);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output:<br />Compiler error</p>
-<p>Explanation:<br />Note the difference between structure/union declaration and variable declaration. When you declare a structure, you actually declare a new data type suitable for your purpose. So you cannot initialize values as it is not a variable declaration but a data type declaration.</p>
-<p>Reference:<br /><a href="http://www.lix.polytechnique.fr/~liberti/public/computing/prog/c/C/SYNTAX/struct.html">http://www.lix.polytechnique.fr/~liberti/public/computing/prog/c/C/SYNTAX/struct.html</a></p>
-<p><strong>Question 2</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">char a[2][3][3] = {'g','e','e','k','s','f','o',</span></p>
-<p><span lang="zxx">'r','g','e','e','k','s'};</span></p>
-<p><span lang="zxx">printf("%s ", **a);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output:<br />geeksforgeeks</p>
-<p>Explanation:<br />We have created a 3D array that should have 2*3*3 (= 18) elements, but we are initializing only 13 of them. In C when we initialize less no of elements in an array all uninitialized elements become &lsquo;\0&rsquo; in case of char and 0 in case of integers.</p>
-<p><strong>Question 3</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">char str[]= "geeks\nforgeeks";</span></p>
-<p><span lang="zxx">char *ptr1, *ptr2;</span></p>
-<p><span lang="zxx">ptr1 = &amp;str[3];</span></p>
-<p><span lang="zxx">ptr2 = str + 5;</span></p>
-<p><span lang="zxx">printf("%c", ++*str - --*ptr1 + *ptr2 + 2);</span></p>
-<p><span lang="zxx">printf("%s", str);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output:<br />heejs<br />forgeeks</p>
-<p>Explanation:<br />Initially ptr1 points to &lsquo;k&rsquo; and ptr2 points to &lsquo;\n&rsquo; in &ldquo;geeks\nforgeeks&rdquo;. In print statement value at str is incremented by 1 and value at ptr1 is decremented by 1. So string becomes &ldquo;heejs\nforgeeks&rdquo; .</p>
-<p>First print statement becomes<br />printf(&ldquo;%c&rdquo;, &lsquo;h&rsquo; &ndash; &lsquo;j&rsquo; + &lsquo;n&rsquo; + 2)</p>
-<p>&lsquo;<span lang="zxx">h&rsquo; &ndash; &lsquo;j&rsquo; + &lsquo;\n&rsquo; + 2 = -2 + &lsquo;\n&rsquo; + 2 = &lsquo;\n&rsquo;</span></p>
-<p>First print statements newline character. and next print statement prints &ldquo;heejs\nforgeeks&rdquo;.</p>
-<p><strong>Question 4</strong></p>
-<p>#include &lt;stdio.h&gt;</p>
-<p>int fun(int n)</p>
-<p>{</p>
-<p><span lang="zxx">int i, j, sum = 0;</span></p>
-<p><span lang="zxx">for(i = 1;i&lt;=n;i++)</span></p>
-<p><span lang="zxx">for(j=i;j&lt;=i;j++)</span></p>
-<p><span lang="zxx">sum=sum+j;</span></p>
-<p><span lang="zxx">return(sum);</span></p>
-<p>}</p>
-<p><br /><br /></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">printf("%d", fun(15));</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: 120<br />Explanation: fun(n) calculates sum of first n integers or we can say it returns n(n+1)/2.</p>
-<p><strong>Question 5</strong></p>
-<p><span lang="zxx">#include &lt;stdio.h&gt;</span></p>
-<p><span lang="zxx">int main()</span></p>
-<p><span lang="zxx">{</span></p>
-<p><span lang="zxx">int c = 5, no = 1000;</span></p>
-<p><span lang="zxx">do {</span></p>
-<p><span lang="zxx">no /= c;</span></p>
-<p><span lang="zxx">} while(c--);</span></p>
-<p><br /><br /></p>
-<p><span lang="zxx">printf ("%d\n", no);</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p><span lang="zxx">}</span></p>
-<p>Output: Exception &ndash; Divide by zero</p>
-<p>Explanation: There is a bug in the above program. It goes inside the do-while loop for c = 0 also. Be careful when you are using do-while loop like this!!</p>
-<p><strong>Question 1</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">while(1){</span></p>
-<p><span lang="zxx">if(printf("%d",printf("%d")))</span></p>
-<p><span lang="zxx">break;</span></p>
-<p><span lang="zxx">else</span></p>
-<p><span lang="zxx">continue;</span></p>
-<p><span lang="zxx">}</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output:<br />Can&rsquo;t be predicted</p>
-<p>Explanation:<br />The condition in while loop is 1 so at first shot it looks infinite loop. Then there are break and continue in the body of the while loop, so it may not be infinite loop. The break statement will be executed if the condition under if is met, otherwise continue will be executed. Since there&rsquo;s no other statements after continue in the while loop, continue doesn&rsquo;t serve any purpose. In fact it is extraneous. So let us see the if condition. If we look carefully, we will notice that the condition of the if will be met always, so break will be executed at the first iteration itself and we will come out of while loop. The reason why the condition of if will be met is printf function. Function printf always returns the no. of bytes it has output. For example, the return value of printf(&ldquo;geeks&rdquo;) will be 5 because printf will output 5 characters here. In our case, the inner printf will be executed first but this printf doesn&rsquo;t have argument for format specifier i.e. %d. It means this printf will print any arbitrary value. But notice that even for any arbirary value, the no. of bytes output by inner printf would be non-zero. And those no. of bytes will work as argument to outer printf. The outer printf will print that many no. of bytes and return non-zero value always. So the condition for if is also true always. Therefore, the while loop be executed only once. As a side note, even without outer printf also, the condition for if is always true.</p>
-<p><strong>Question 2</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">unsigned int i=10;</span></p>
-<p><span lang="zxx">while(i-- &gt;= 0)</span></p>
-<p><span lang="zxx">printf("%u ",i);</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output:<br />9 8 7 6 5 4 3 2 1 0 4294967295 4294967294 &hellip;&hellip; (on a machine where int is 4 bytes long)</p>
-<p>9 8 7 6 5 4 3 2 1 0 65535 65534 &hellip;. (on a machine where int is 2 bytes long)</p>
-<p>Explanation:<br />Let us examine the condition of while loop. It is obvious that as far as the condition of while loop is met, printf will be executed. There are two operators in the condition of while loop: post-decrement operator and comparison operator. From operator precedence, we know that unary operator post-decrement has higher priority than comparison operator. But due to post-decrement property, the value of i will be decremented only after it had been used for comparison. So at the first iteration, the condition is true because 10&gt;=0 and then i is decremented. Therefore 9 will be printed. Similarly the loop continues and the value of i keeps on decrementing. Let us see what what happen when condition of while loop becomes 0 &gt;= 0. At this time, condition is met and i is decremented. Since i is unsigned integer, the roll-over happens and i takes the value of the highest +ve value an unsigned int can take. So i is never negative. Therefore, it becomes infinite while loop.</p>
-<p>As a side note, if i was signed int, the while loop would have been terminated after printing the highest negative value.</p>
-<p><strong>Question 3</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int x,y=2,z,a;</span></p>
-<p><span lang="zxx">if ( x = y%2)</span></p>
-<p><span lang="zxx">z =2;</span></p>
-<p><span lang="zxx">a=2;</span></p>
-<p><span lang="zxx">printf("%d %d ",z,x);</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output:<br />&lt; some garbage value of z &gt; 0</p>
-<p>Explanation:<br />This question has some stuff for operator precedence. If the condition of if is met, then z will be initialized to 2 otherwise z will contain garbage value. But the condition of if has two operators: assignment operator and modulus operator. The precedence of modulus is higher than assignment. So y%2 is zero and it&rsquo;ll be assigned to x. So the value of x becomes zero which is also the effective condition for if. And therefore, condition of if is false.</p>
-<p><strong>Question 4</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int a[10];</span></p>
-<p><span lang="zxx">printf("%d",*a+1-*a+3);</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: 4</p>
-<p>Explanation:<br />From operator precedence, de-reference operator has higher priority than addition/subtraction operator. So de-reference will be applied first. Here, a is an array which is not initialized. If we use a, then it will point to the first element of the array. Therefore *a will be the first element of the array. Suppose first element of array is x, then the argument inside printf becomes as follows. It&rsquo;s effective value is 4.</p>
-<p>x + 1 &ndash; x + 3 = 4</p>
-<p><strong>Question 5</strong></p>
-<p>#define prod(a,b) a*b</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int x=3,y=4;</span></p>
-<p><span lang="zxx">printf("%d",prod(x+2,y-1));</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output:<br />10</p>
-<p>Explanation:<br />This program deals with macros, their side effects and operator precedence. Here prod is a macro which multiplies its two arguments a and b. Let us take a closer look.</p>
-<p>prod(a, b) = a*b<br />prod(x+2, y-1) = x+2*y-1 = 3+2*4-1 = 3+8-1=10</p>
-<p>If the programmer really wanted to multiply x+2 and y-1, he should have put parenthesis around a and b as follows.</p>
-<p>prod(a,b) = (a)*(b)</p>
-<p>This type of mistake in macro definition is called &ndash; macro side-effects.</p>
-<p><strong>Question 1</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">unsigned int i=65000;</span></p>
-<p><span lang="zxx">while ( i++ != 0 );</span></p>
-<p><span lang="zxx">printf("%d",i);</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output:<br />1</p>
-<p>Explanation:<br />It should be noticed that there&rsquo;s a semi-colon in the body of while loop. So even though, nothing is done as part of while body, the control will come out of while only if while condition isn&rsquo;t met. In other words, as soon as i inside the condition becomes 0, the condition will become false and while loop would be over. But also notice the post-increment operator in the condition of while. So first i will be compared with 0 and i will be incremented no matter whether condition is met or not. Since i is initialized to 65000, it will keep on incrementing till it reaches highest positive value. After that roll over happens, and the value of i becomes zero. The condition is not met, but i would be incremented i.e. to 1. Then printf will print 1.</p>
-<p><strong>Question 2</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int i=0;</span></p>
-<p><span lang="zxx">while ( +(+i--) != 0)</span></p>
-<p><span lang="zxx">i-=i++;</span></p>
-<p><span lang="zxx">printf("%d",i);</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output:<br />-1</p>
-<p>Explanation:<br />Let us first take the condition of while loop. There are several operator there. Unary + operator doesn&rsquo;t do anything. So the simplified condition becomes (i&ndash;) != 0. So i will be compared with 0 and then decremented no matter whether condition is true or false. Since i is initialized to 0, the condition of while will be false at the first iteration itself but i will be decremented to -1. The body of while loop will not be executed. And printf will print -1.</p>
-<p>So it wasn&rsquo;t that scary as it seemed to be!</p>
-<p><strong>Question 3</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">float f=5,g=10;</span></p>
-<p><span lang="zxx">enum{i=10,j=20,k=50};</span></p>
-<p><span lang="zxx">printf("%d\n",++k);</span></p>
-<p><span lang="zxx">printf("%f\n",f&lt;&lt;2);</span></p>
-<p><span lang="zxx">printf("%lf\n",f%g);</span></p>
-<p><span lang="zxx">printf("%lf\n",fmod(f,g));</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output:<br />Program will not compile and give 3 errors</p>
-<p>Explanation:<br />Here, i, j and k are inside the enum and therefore, they are like constants. In other words, if want to us 10 anywhere in the program , we can use i instead. In the first printf, the value of i is being modified which is not allowed because it&rsquo;s enum constant. In the second printf, left-shift operator is being applied on a float which is also not allowed. Similarly, in the third printf, modulus operator is being applied on float f and g which is also not allowed.</p>
-<p><strong>Question 4</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int i=10;</span></p>
-<p><span lang="zxx">void pascal f(int,int,int);</span></p>
-<p><span lang="zxx">f(i++, i++, i++);</span></p>
-<p><span lang="zxx">printf(" %d",i);</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>void pascal f(integer :i,integer:j,integer :k)</p>
-<p>{</p>
-<p><span lang="zxx">write(i,j,k);</span></p>
-<p>}</p>
-<p>Output:<br />Program will give compile-time error</p>
-<p>Explanation:<br />Compiler specific question. Not all compilers support this.</p>
-<p>Otherwise, pascal enforces left to right processing of arguments. So even though, the argument processing order can be changed by the use of pascal, we can&rsquo;t use Pascal language routines such as write inside C program.</p>
-<p><strong>Question 5</strong></p>
-<p>void pascal f(int i,int j,int k)</p>
-<p>{</p>
-<p><span lang="zxx">printf("%d %d %d",i, j, k);</span></p>
-<p>}</p>
-<p><br /><br /></p>
-<p>void cdecl f(int i,int j,int k)</p>
-<p>{</p>
-<p><span lang="zxx">printf("%d %d %d",i, j, k);</span></p>
-<p>}</p>
-<p><br /><br /></p>
-<p>main()</p>
-<p>{</p>
-<p><span lang="zxx">int i=10;</span></p>
-<p><span lang="zxx">f(i++,i++,i++);</span></p>
-<p><span lang="zxx">printf(" %d\n",i);</span></p>
-<p><span lang="zxx">i=10;</span></p>
-<p><span lang="zxx">f(i++,i++,i++);</span></p>
-<p><span lang="zxx">printf(" %d",i);</span></p>
-<p>}</p>
-<p>Output:<br />Compiler specific question. Not all the compilers allow this.</p>
-<p>Explanation:<br />This question deals with the argument passing mechanism. If we call a function, the order in which the arguments of the function are processed is not governed by C Standard. So one compiler can process the arguments from left to right while the other compiler can process them right to left. Usually, the programs are not affected with this because the arguments of the programs are different. For example if we call funtion fun as fun(i,j), then no matter in which order the arguments are processed, the value of i and j will be consistent.</p>
-<p>But in this case, we are passing the arguments to function f using the same variable. So the order in which arguments are processed by the function will determine the value of those arguments. cdecl enforces right to left processing of arguments while pascal enforces left to right processing of arguments.</p>
-<p>So the value of i, j and k inside the first function f will be 10, 11 and 12 respectively while the value of i, j and k inside the second function f will be 12, 11 and 10 respectively.</p>
-<p><strong>Question 1</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int i = 0;</span></p>
-<p><span lang="zxx">while (i &lt;= 4)</span></p>
-<p><span lang="zxx">{</span></p>
-<p><span lang="zxx">printf("%d", i);</span></p>
-<p><span lang="zxx">if (i &gt; 3)</span></p>
-<p><span lang="zxx">goto inside_foo;</span></p>
-<p><span lang="zxx">i++;</span></p>
-<p><span lang="zxx">}</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p><br /><br /></p>
-<p>void foo()</p>
-<p>{</p>
-<p><span lang="zxx">inside_foo:</span></p>
-<p><span lang="zxx">printf("PP");</span></p>
-<p>}</p>
-<p>Output: Compiler error: Label &ldquo;inside_foo&rdquo; used but not defined.</p>
-<p>Explanation: Scope of a label is within a function. We cannot goto a label from other function.</p>
-<p>Question 2</p>
-<p>#define a 10</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">#define a 50</span></p>
-<p><span lang="zxx">printf("%d",a);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: 50</p>
-<p>Preprocessor doesn&rsquo;t give any error if we redefine a preprocessor directive. It may give warning though. Preprocessor takes the most recent value before use of and put it in place of a.</p>
-<p>Now try following</p>
-<p>#define a 10</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">printf("%d ",a);</span></p>
-<p><span lang="zxx">#define a 50</span></p>
-<p><span lang="zxx">printf("%d ",a);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p><strong><br />Question 3</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">char str[] = "geeksforgeeks";</span></p>
-<p><span lang="zxx">char *s1 = str, *s2 = str;</span></p>
-<p><span lang="zxx">int i;</span></p>
-<p><span lang="zxx">for(i = 0; i &lt; 7; i++)</span></p>
-<p><span lang="zxx">{</span></p>
-<p><span lang="zxx">printf(" %c ", *str);</span></p>
-<p><span lang="zxx">++s1;</span></p>
-<p><span lang="zxx">}</span></p>
-<p><span lang="zxx">for(i = 0; i &lt; 6; i++)</span></p>
-<p><span lang="zxx">{</span></p>
-<p><span lang="zxx">printf(" %c ", *s2);</span></p>
-<p><span lang="zxx">++s2;</span></p>
-<p><span lang="zxx">}</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output<br />g g g g g g g g e e k s f</p>
-<p>Explanation<br />Both s1 and s2 are initialized to str. In first loop str is being printed and s1 is being incremented, so first loop will print only g. In second loop s2 is incremented and s2 is printed so second loop will print &ldquo;g e e k s f &rdquo;</p>
-<p>Question 4</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">char str[] = "geeksforgeeks";</span></p>
-<p><span lang="zxx">int i;</span></p>
-<p><span lang="zxx">for(i=0; str[i]; i++)</span></p>
-<p><span lang="zxx">printf("\n%c%c%c%c", str[i], *(str+i), *(i+str), i[str]);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output:<br />gggg<br />eeee<br />eeee<br />kkkk<br />ssss<br />ffff<br />oooo<br />rrrr<br />gggg<br />eeee<br />eeee<br />kkkk<br />ssss</p>
-<p>Explanaition:<br />Following are different ways of indexing both array and string.</p>
-<p>arr[i]<br />*(arr + i)<br />*(i + arr)<br />i[arr]</p>
-<p>So all of them print same character.</p>
-<p>Question 5</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">char *p;</span></p>
-<p><span lang="zxx">printf("%d %d ", sizeof(*p), sizeof(p));</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: Compiler dependent. I got output as &ldquo;1 4&rdquo;</p>
-<p>Explanation:<br />Output of the above program depends on compiler. sizeof(*p) gives size of character. If characters are stored as 1 byte then sizeof(*p) gives 1.<br />sizeof(p) gives the size of pointer variable. If pointer variables are stored as 4 bytes then it gives 4.</p>
-<p><strong>Question 1:</strong></p>
-<p>#include&lt;stdio.h&gt;</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int x = 5, p = 10;</span></p>
-<p><span lang="zxx">printf("%*d", x, p);</span></p>
-<p><br /><br /></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output:</p>
-<p><span lang="zxx">10</span></p>
-<p>Explanation:<br />Please see standard printf function definition</p>
-<p><span lang="zxx">int printf ( const char * format, ... );</span></p>
-<p><strong><span lang="zxx">format:</span></strong><span lang="zxx">String that contains the text to be written to stdout. It can optionally contain embedded format tags that are substituted by the values specified in subsequent argument(s) and formatted as requested. The number of arguments following the format parameters should at least be as much as the number of format tags. The format tags follow this prototype:</span></p>
-<p><span lang="zxx">%[flags][width][.precision][length]specifier</span></p>
-<p>You can see details of all above parts here&nbsp;<a href="http://www.cplusplus.com/reference/clibrary/cstdio/printf/">http://www.cplusplus.com/reference/clibrary/cstdio/printf/</a>.</p>
-<p><span lang="zxx">The main thing to note is below the line about precision<br /></span><strong><span lang="zxx">* (star)</span></strong><span lang="zxx">: The precision is not specified in the format string, but as an additional integer value argument preceding the argument that has to be formatted.</span></p>
-<p>So, in the above example 5 is precision and 10 is the actual value to be printed. (Thanks to Ajay Mishra for providing the solution)</p>
-<p><span lang="zxx"><br /></span><strong><span lang="zxx">Question 2</span></strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">char arr[] = "geeksforgeeks";</span></p>
-<p><span lang="zxx">char *ptr = arr;</span></p>
-<p><br /><br /></p>
-<p><span lang="zxx">while(*ptr != '\0')</span></p>
-<p><span lang="zxx">++*ptr++;</span></p>
-<p><span lang="zxx">printf("%s %s", arr, ptr);</span></p>
-<p><br /><br /></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: hffltgpshfflt</p>
-<p>Explanation:<br />The crust of this question lies in expression ++*ptr++.</p>
-<p>If one knows the precedence and associativity of the operators then there is nothing much left. Below is the precedence of operators.</p>
-<p><span lang="zxx">Postfixx ++ left-to-right</span></p>
-<p><span lang="zxx">Prefix ++ right-to-left</span></p>
-<p><span lang="zxx">Dereference * right-to-left</span></p>
-<p>Therefore the expression ++*ptr++ has following effect<br />Value of *ptr is incremented<br />Value of ptr is incremented</p>
-<p><span lang="zxx"><br /></span><strong><span lang="zxx">Question 3</span></strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">signed char i=0;</span></p>
-<p><span lang="zxx">for(; i &gt;= 0; i++);</span></p>
-<p><span lang="zxx">printf("%d\n", i);</span></p>
-<p><br /><br /></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: -128</p>
-<p>Explanation:<br />Here, the first thing to be noticed is the semi-colon in the end of for loop. So basically, there&rsquo;s no body for the for loop. And printf will print the value of i when control comes out of the for loop. Also, notice that the first statement i.e. initializer in the for loop is not present. But i has been initialized at the declaration time. Since i is a signed character, it can take value from -128 to 127. So in the for loop, i will keep incrementing and the condition is met till roll over happens. At the roll over, i will become -128 after 127, in that case condition is not met and control comes out of the for loop.</p>
-<p><span lang="zxx"><br /></span><strong><span lang="zxx">Question 4</span></strong></p>
-<p>#include &lt;stdio.h&gt;</p>
-<p>void fun(const char **p) { }</p>
-<p>int main(int argc, char **argv)</p>
-<p>{</p>
-<p><span lang="zxx">fun(argv);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: Compiler error.</p>
-<p>Explanation:<br />Parameter passed to fun() and parameter expected in definition are of incompatible types. fun() expects const char** while passed parameter is of type char **.</p>
-<p>Now try following program, it will work.</p>
-<p>void fun(const char **p) { }</p>
-<p>int main(int argc, char **argv)</p>
-<p>{</p>
-<p><span lang="zxx">const char **temp;</span></p>
-<p><span lang="zxx">fun(temp);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p><strong>Question 1</strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int c=5;</span></p>
-<p><span lang="zxx">printf("%d\n%d\n%d", c, c &lt;&lt;= 2, c &gt;&gt;= 2);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p>}</p>
-<p>Output: Compiler dependent<br />Evaluation order of parameters is not defined by C standard and is dependent on compiler implementation. It is never safe to depend on the order of parameter evaluation. For example, a function call like above may very well behave differently from one compiler to another.</p>
-<p>References:<br />http://gcc.gnu.org/onlinedocs/gcc/Non_002dbugs.html</p>
-<p><span lang="zxx"><br /></span><strong><span lang="zxx">Question 2</span></strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">char arr[] = {1, 2, 3};</span></p>
-<p><span lang="zxx">char *p = arr;</span></p>
-<p><span lang="zxx">if(&amp;p == &amp;arr)</span></p>
-<p><span lang="zxx">printf("Same");</span></p>
-<p><span lang="zxx">else</span></p>
-<p><span lang="zxx">printf("Not same");</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p>}</p>
-<p>Output: Not Same<br />&amp;arr is an alias for &amp;arr[0] and returns the address of the first element in array, but &amp;p returns the address of pointer p.<br />Now try below program</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">char arr[] = {1, 2, 3};</span></p>
-<p><span lang="zxx">char *p = arr;</span></p>
-<p><span lang="zxx">if(p == &amp;arr)</span></p>
-<p><span lang="zxx">printf("Same");</span></p>
-<p><span lang="zxx">else</span></p>
-<p><span lang="zxx">printf("Not same");</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p>}</p>
-<p><span lang="zxx"><br /></span><strong><span lang="zxx">Question 3</span></strong></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">char arr[] = {1, 2, 3};</span></p>
-<p><span lang="zxx">char *p = arr;</span></p>
-<p><span lang="zxx">printf(" %d ", sizeof(p));</span></p>
-<p><span lang="zxx">printf(" %d ", sizeof(arr));</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p>}</p>
-<p>Output 4 3<br />sizeof(arr) returns the amount of memory used by all elements in array<br />and sizeof(p) returns the amount of memory used by the pointer variable itself.</p>
-<p><span lang="zxx"><br /></span><strong><span lang="zxx">Question 4</span></strong></p>
-<p>int x = 0;</p>
-<p>int f()</p>
-<p>{</p>
-<p><span lang="zxx">return x;</span></p>
-<p>}</p>
-<p><br /><br /></p>
-<p>int g()</p>
-<p>{</p>
-<p><span lang="zxx">int x = 1;</span></p>
-<p><span lang="zxx">return f();</span></p>
-<p>}</p>
-<p><br /><br /></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">printf("%d", g());</span></p>
-<p><span lang="zxx">printf("\n");</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p>}</p>
-<p>Output: 0<br />In C, variables are always statically (or lexically) scoped. Binding of x inside f() to global variable x is defined at compile time and not dependent on who is calling it. Hence, output for the above program will be 0.</p>
-<p>On a side note, Perl supports both dynamic ans static scoping. Perl&rsquo;s keyword &ldquo;my&rdquo; defines a statically scoped local variable, while the keyword &ldquo;local&rdquo; defines dynamically scoped local variable. So in Perl, similar (see below) program will print 1.</p>
-<p><span lang="zxx">$x = 0;</span></p>
-<p><span lang="zxx">sub f</span></p>
-<p><span lang="zxx">{</span></p>
-<p><span lang="zxx">return $x;</span></p>
-<p><span lang="zxx">}</span></p>
-<p><span lang="zxx">sub g</span></p>
-<p><span lang="zxx">{</span></p>
-<p><span lang="zxx">local $x = 1; return f();</span></p>
-<p><span lang="zxx">}</span></p>
-<p><span lang="zxx">print g()."\n";</span></p>
-<p>Reference:<br /><a href="http://en.wikipedia.org/wiki/Scope_%28programming%29">http://en.wikipedia.org/wiki/Scope_%28programming%29</a></p>
-<p>Please write comments if you find any of the above answers/explanations incorrect.</p>
-<p><strong>Question 1</strong></p>
-<p>#include&lt;stdio.h&gt;</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">typedef int i;</span></p>
-<p><span lang="zxx">i a = 0;</span></p>
-<p><span lang="zxx">printf("%d", a);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p><span lang="zxx">Output: 0<br />There is no problem with the program. It simply creates a user defined type&nbsp;</span><em><span lang="zxx">i&nbsp;</span></em><span lang="zxx">and creates a variable&nbsp;</span><em><span lang="zxx">a</span></em><span lang="zxx">of type</span><em><span lang="zxx">i</span></em><span lang="zxx">.</span></p>
-<p><span lang="zxx"><br /></span><strong><span lang="zxx">Question 2</span></strong></p>
-<p>#include&lt;stdio.h&gt;</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">typedef int *i;</span></p>
-<p><span lang="zxx">int j = 10;</span></p>
-<p><span lang="zxx">i *a = &amp;j;</span></p>
-<p><span lang="zxx">printf("%d", **a);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p><span lang="zxx">Output: Compiler Error -&gt; Initialization with incompatible pointer type.<br />The line&nbsp;</span><em><span lang="zxx">typedef int *i</span></em><span lang="zxx">makes</span><em><span lang="zxx">i</span></em><span lang="zxx">as type int *. So, the declaration of&nbsp;</span><em><span lang="zxx">a&nbsp;</span></em><span lang="zxx">means&nbsp;</span><em><span lang="zxx">a</span></em><span lang="zxx">is pointer to a pointer. The Error message may be different on different compilers.</span></p>
-<p><span lang="zxx"><br /></span><strong><span lang="zxx">Question 3</span></strong></p>
-<p>#include&lt;stdio.h&gt;</p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">typedef static int *i;</span></p>
-<p><span lang="zxx">int j;</span></p>
-<p><span lang="zxx">i a = &amp;j;</span></p>
-<p><span lang="zxx">printf("%d", *a);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: Compiler Error -&gt; Multiple Storage classes for a.<br />In C, typedef is considered as a&nbsp;<a href="http://www.itee.uq.edu.au/~comp2303/Leslie_C_ref/C/CONCEPT/storage_class.html">storage class</a>. The Error message may be different on different compilers.</p>
-<p>#include&lt;stdio.h&gt;</p>
-<p>int fun(int n, int *fg)</p>
-<p>{</p>
-<p><span lang="zxx">int t, f;</span></p>
-<p><span lang="zxx">if(n &lt;= 1)</span></p>
-<p><span lang="zxx">{</span></p>
-<p><span lang="zxx">*fg = 1;</span></p>
-<p><span lang="zxx">return 1;</span></p>
-<p><span lang="zxx">}</span></p>
-<p><span lang="zxx">t = fun(n-1, fg);</span></p>
-<p><span lang="zxx">f = t + *fg;</span></p>
-<p><span lang="zxx">*fg = t;</span></p>
-<p><span lang="zxx">return f;</span></p>
-<p>}</p>
-<p>int main( )</p>
-<p>{</p>
-<p><span lang="zxx">int x = 15;</span></p>
-<p><span lang="zxx">printf ( "%d\n", fun (5, &amp;x));</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p><span lang="zxx">In the above program, there will be recursive calls till n is&nbsp;</span><strong><span lang="zxx">not</span></strong><span lang="zxx">smaller than or equal to 1.</span></p>
-<p>fun(5, &amp;x)</p>
-<p><span lang="zxx">\</span></p>
-<p><span lang="zxx">\</span></p>
-<p><span lang="zxx">fun(4, fg)</span></p>
-<p><span lang="zxx">\</span></p>
-<p><span lang="zxx">\</span></p>
-<p><span lang="zxx">fun(3, fg)</span></p>
-<p><span lang="zxx">\</span></p>
-<p><span lang="zxx">\</span></p>
-<p><span lang="zxx">fun(2, fg)</span></p>
-<p><span lang="zxx">\</span></p>
-<p><span lang="zxx">\</span></p>
-<p><span lang="zxx">fun(1, fg)</span></p>
-<p>fun(1, fg) does not further call fun() because n is 1 now, and it goes inside the if part. It changes value at address fg to 1, and returns 1.</p>
-<p>Inside fun(2, fg)</p>
-<p><span lang="zxx">t = fun(n-1, fg); --&gt; t = 1</span></p>
-<p><span lang="zxx">/* After fun(1, fg) is called, fun(2, fg) does following */</span></p>
-<p><span lang="zxx">f = t + *fg; --&gt; f = 1 + 1 (changed by fun(1, fg)) = 2</span></p>
-<p><span lang="zxx">*fg = t; --&gt; *fg = 1</span></p>
-<p><span lang="zxx">return f (or return 2)</span></p>
-<p>Inside fun(3, fg)</p>
-<p><span lang="zxx">t = fun(2, fg); --&gt; t = 2</span></p>
-<p><span lang="zxx">/* After fun(2, fg) is called, fun(3, fg) does following */</span></p>
-<p><span lang="zxx">f = t + *fg; --&gt; f = 2 + 1 = 3</span></p>
-<p><span lang="zxx">*fg = t; --&gt; *fg = 2</span></p>
-<p><span lang="zxx">return f (or return 3)</span></p>
-<p>Inside fun(4, fg)</p>
-<p><span lang="zxx">t = fun(3, fg); --&gt; t = 3</span></p>
-<p><span lang="zxx">/* After fun(3, fg) is called, fun(4, fg) does following */</span></p>
-<p><span lang="zxx">f = t + *fg; --&gt; f = 3 + 2 = 5</span></p>
-<p><span lang="zxx">*fg = t; --&gt; *fg = 3</span></p>
-<p><span lang="zxx">return f (or return 5)</span></p>
-<p>Inside fun(5, fg)</p>
-<p><span lang="zxx">t = fun(4, fg); --&gt; t = 5</span></p>
-<p><span lang="zxx">/* After fun(4, fg) is called, fun(5, fg) does following */</span></p>
-<p><span lang="zxx">f = t + *fg; --&gt; f = 5 + 3 = 8</span></p>
-<p><span lang="zxx">*fg = t; --&gt; *fg = 5</span></p>
-<p><span lang="zxx">return f (or return 8 )</span></p>
-<p>Finally, value returned by fun(5, &amp;x) is printed, so 8 is printed on the screen</p>
-<p><strong>Question 1</strong></p>
-<p>int fun(char *str1)</p>
-<p>{</p>
-<p><span lang="zxx">char *str2 = str1;</span></p>
-<p><span lang="zxx">while(*++str1);</span></p>
-<p><span lang="zxx">return (str1-str2);</span></p>
-<p>}</p>
-<p><br /><br /></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">char *str = "geeksforgeeks";</span></p>
-<p><span lang="zxx">printf("%d", fun(str));</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p><span lang="zxx">Output: 13<br />Inside fun(), pointer str2 is initialized as str1 and str1 is moved till &lsquo;\0&rsquo; is reached (note&nbsp;</span><strong><span lang="zxx">;</span></strong><span lang="zxx">after while loop). So str1 will be incremented by 13 (assuming that char takes 1 byte).</span></p>
-<p><strong>Question 2</strong></p>
-<p>void fun(int *p)</p>
-<p>{</p>
-<p><span lang="zxx">static int q = 10;</span></p>
-<p><span lang="zxx">p = &amp;q;</span></p>
-<p>}</p>
-<p><br /><br /></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int r = 20;</span></p>
-<p><span lang="zxx">int *p = &amp;r;</span></p>
-<p><span lang="zxx">fun(p);</span></p>
-<p><span lang="zxx">printf("%d", *p);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: 20<br />Inside fun(), q is a copy of the pointer p. So if we change q to point something else then p remains unaffected.</p>
-<p><strong>Question 3</strong></p>
-<p>void fun(int **p)</p>
-<p>{</p>
-<p><span lang="zxx">static int q = 10;</span></p>
-<p><span lang="zxx">*p = &amp;q;</span></p>
-<p>}</p>
-<p><br /><br /></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int r = 20;</span></p>
-<p><span lang="zxx">int *p = &amp;r;</span></p>
-<p><span lang="zxx">fun(&amp;p);</span></p>
-<p><span lang="zxx">printf("%d", *p);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output 10</p>
-<p>Note that we are passing address of p to fun(). p in fun() is actually a pointer to p in main() and we are changing value at p in fun(). So p of main is changed to point q of fun(). To understand it better, let us rename p in fun() to p_ref or ptr_to_p</p>
-<p>void fun(int **ptr_to_p)</p>
-<p>{</p>
-<p><span lang="zxx">static int q = 10;</span></p>
-<p><span lang="zxx">*ptr_to_p = &amp;q; /*Now p of main is pointing to q*/</span></p>
-<p>}</p>
-<p>Also, note that the program won&rsquo;t cause any problem because q is a&nbsp;<a href="http://www.itee.uq.edu.au/~comp2303/Leslie_C_ref/C/CONCEPT/storage_class.html#static">static&nbsp;</a>variable. Static variables exist in memory even after functions return. For an&nbsp;<a href="http://www.itee.uq.edu.au/~comp2303/Leslie_C_ref/C/CONCEPT/storage_class.html#auto">auto&nbsp;</a>variable, we might have seen some weird output because auto variable may not exist in memory after functions return.</p>
-<p><strong><span lang="zxx">Question 1</span></strong><span lang="zxx"><br />Predict the output of below program.</span></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">char arr[] = "geeksforgeeks";</span></p>
-<p><span lang="zxx">printf("%d", sizeof(arr));</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: 14<br />The string &ldquo;geeksforgeeks&rdquo; has 13 characters, but the size is 14 because compiler includes a single &lsquo;\0&rsquo; (string terminator) when char array size is not explicitly mentioned.</p>
-<p><strong><span lang="zxx">Question 2</span></strong><span lang="zxx"><br />In below program, what would you put in place of &ldquo;?&rdquo; to print &ldquo;geeks&rdquo;. Obviously, something other than &ldquo;geeks&rdquo;.</span></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">char arr[] = "geeksforgeeks";</span></p>
-<p><span lang="zxx">printf("%s", ?);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Answer: (arr+8)<br />The printf statement prints everything starting from arr+8 until it finds &lsquo;\0&rsquo;</p>
-<p><strong><span lang="zxx">Question 3</span></strong><span lang="zxx"><br />Predict the output of below program.</span></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">int x, y = 5, z = 5;</span></p>
-<p><span lang="zxx">x = y==z;</span></p>
-<p><span lang="zxx">printf("%d", x);</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>The crux of the question lies in the statement x = y==z. The operator == is executed before = because precedence of comparison operators (&lt;=, &gt;= and ==) is higher than assignment operator =.<br />The result of a comparison operator is either 0 or 1 based on the comparison result. Since y is equal to z, value of the expression y == z becomes 1 and the value is assigned to x via the assignment operator.</p>
-<p><strong><span lang="zxx">Question 4</span></strong><span lang="zxx"><br />Predict the output of below program.</span></p>
-<p>int main()</p>
-<p>{</p>
-<p><span lang="zxx">printf(" \"GEEKS %% FOR %% GEEKS\"");</span></p>
-<p><span lang="zxx">getchar();</span></p>
-<p><span lang="zxx">return 0;</span></p>
-<p>}</p>
-<p>Output: &ldquo;GEEKS % FOR % GEEKS&rdquo;</p>
-<p>Backslash (\) works as escape character for double quote (&ldquo;). For explanation of %%, please see&nbsp;<a href="http://www.geeksforgeeks.org/?p=1300">this</a>.</p>
-<p><br /><br /></p>
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 12">
+<meta name=Originator content="Microsoft Word 12">
+<link rel=File-List href="C%20Programming%20Practice_files/filelist.xml">
+<link rel=Edit-Time-Data href="C%20Programming%20Practice_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Sanju</o:Author>
+  <o:LastAuthor>Sanju</o:LastAuthor>
+  <o:Revision>1</o:Revision>
+  <o:TotalTime>11</o:TotalTime>
+  <o:Created>2017-05-18T18:07:00Z</o:Created>
+  <o:LastSaved>2017-05-18T18:18:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>98</o:Words>
+  <o:Characters>563</o:Characters>
+  <o:Lines>4</o:Lines>
+  <o:Paragraphs>1</o:Paragraphs>
+  <o:CharactersWithSpaces>660</o:CharactersWithSpaces>
+  <o:Version>12.00</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:RelyOnVML/>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+<link rel=themeData href="C%20Programming%20Practice_files/themedata.thmx">
+<link rel=colorSchemeMapping
+href="C%20Programming%20Practice_files/colorschememapping.xml">
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:TrackMoves>false</w:TrackMoves>
+  <w:TrackFormatting/>
+  <w:PunctuationKerning/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:DoNotPromoteQF/>
+  <w:LidThemeOther>EN-US</w:LidThemeOther>
+  <w:LidThemeAsian>X-NONE</w:LidThemeAsian>
+  <w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+   <w:SplitPgBreakAndParaMark/>
+   <w:DontVertAlignCellWithSp/>
+   <w:DontBreakConstrainedForcedTables/>
+   <w:DontVertAlignInTxbx/>
+   <w:Word11KerningPairs/>
+   <w:CachedColBalance/>
+  </w:Compatibility>
+  <m:mathPr>
+   <m:mathFont m:val="Cambria Math"/>
+   <m:brkBin m:val="before"/>
+   <m:brkBinSub m:val="--"/>
+   <m:smallFrac m:val="off"/>
+   <m:dispDef/>
+   <m:lMargin m:val="0"/>
+   <m:rMargin m:val="0"/>
+   <m:defJc m:val="centerGroup"/>
+   <m:wrapIndent m:val="1440"/>
+   <m:intLim m:val="subSup"/>
+   <m:naryLim m:val="undOvr"/>
+  </m:mathPr></w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" DefUnhideWhenUsed="true"
+  DefSemiHidden="true" DefQFormat="false" DefPriority="99"
+  LatentStyleCount="267">
+  <w:LsdException Locked="false" Priority="0" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Normal"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="heading 1"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 2"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 3"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 4"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 5"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 6"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 7"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 8"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 9"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 1"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 2"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 3"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 4"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 5"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 6"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 7"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 8"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 9"/>
+  <w:LsdException Locked="false" Priority="35" QFormat="true" Name="caption"/>
+  <w:LsdException Locked="false" Priority="10" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Title"/>
+  <w:LsdException Locked="false" Priority="1" Name="Default Paragraph Font"/>
+  <w:LsdException Locked="false" Priority="11" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Subtitle"/>
+  <w:LsdException Locked="false" Priority="22" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Strong"/>
+  <w:LsdException Locked="false" Priority="20" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Emphasis"/>
+  <w:LsdException Locked="false" Priority="59" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Table Grid"/>
+  <w:LsdException Locked="false" UnhideWhenUsed="false" Name="Placeholder Text"/>
+  <w:LsdException Locked="false" Priority="1" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="No Spacing"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 1"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 1"/>
+  <w:LsdException Locked="false" UnhideWhenUsed="false" Name="Revision"/>
+  <w:LsdException Locked="false" Priority="34" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="List Paragraph"/>
+  <w:LsdException Locked="false" Priority="29" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Quote"/>
+  <w:LsdException Locked="false" Priority="30" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Intense Quote"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 1"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 1"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 2"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 2"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 2"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 3"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 3"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 3"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 4"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 4"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 4"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 5"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 5"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 5"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 6"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 6"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 6"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="19" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Subtle Emphasis"/>
+  <w:LsdException Locked="false" Priority="21" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Intense Emphasis"/>
+  <w:LsdException Locked="false" Priority="31" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Subtle Reference"/>
+  <w:LsdException Locked="false" Priority="32" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Intense Reference"/>
+  <w:LsdException Locked="false" Priority="33" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Book Title"/>
+  <w:LsdException Locked="false" Priority="37" Name="Bibliography"/>
+  <w:LsdException Locked="false" Priority="39" QFormat="true" Name="TOC Heading"/>
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+  {font-family:"Cambria Math";
+  panose-1:2 4 5 3 5 4 6 3 2 4;
+  mso-font-charset:0;
+  mso-generic-font-family:roman;
+  mso-font-pitch:variable;
+  mso-font-signature:-1610611985 1107304683 0 0 415 0;}
+@font-face
+  {font-family:Cambria;
+  panose-1:2 4 5 3 5 4 6 3 2 4;
+  mso-font-charset:0;
+  mso-generic-font-family:roman;
+  mso-font-pitch:variable;
+  mso-font-signature:-1610611985 1073741899 0 0 415 0;}
+@font-face
+  {font-family:Calibri;
+  panose-1:2 15 5 2 2 2 4 3 2 4;
+  mso-font-charset:0;
+  mso-generic-font-family:swiss;
+  mso-font-pitch:variable;
+  mso-font-signature:-520092929 1073786111 9 0 415 0;}
+@font-face
+  {font-family:Consolas;
+  panose-1:2 11 6 9 2 2 4 3 2 4;
+  mso-font-charset:0;
+  mso-generic-font-family:modern;
+  mso-font-pitch:fixed;
+  mso-font-signature:-520092929 1073806591 9 0 415 0;}
+@font-face
+  {font-family:"Open Sans";
+  panose-1:2 11 6 6 3 5 4 2 2 4;
+  mso-font-charset:0;
+  mso-generic-font-family:swiss;
+  mso-font-pitch:variable;
+  mso-font-signature:-536870161 1073750107 40 0 415 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+  {mso-style-unhide:no;
+  mso-style-qformat:yes;
+  mso-style-parent:"";
+  margin-top:0in;
+  margin-right:0in;
+  margin-bottom:10.0pt;
+  margin-left:0in;
+  line-height:115%;
+  mso-pagination:widow-orphan;
+  font-size:11.0pt;
+  font-family:"Calibri","sans-serif";
+  mso-ascii-font-family:Calibri;
+  mso-ascii-theme-font:minor-latin;
+  mso-fareast-font-family:Calibri;
+  mso-fareast-theme-font:minor-latin;
+  mso-hansi-font-family:Calibri;
+  mso-hansi-theme-font:minor-latin;
+  mso-bidi-font-family:"Times New Roman";
+  mso-bidi-theme-font:minor-bidi;}
+p.MsoTitle, li.MsoTitle, div.MsoTitle
+  {mso-style-priority:10;
+  mso-style-unhide:no;
+  mso-style-qformat:yes;
+  mso-style-link:"Title Char";
+  mso-style-next:Normal;
+  margin-top:0in;
+  margin-right:0in;
+  margin-bottom:15.0pt;
+  margin-left:0in;
+  mso-add-space:auto;
+  mso-pagination:widow-orphan;
+  border:none;
+  mso-border-bottom-alt:solid #4F81BD 1.0pt;
+  mso-border-bottom-themecolor:accent1;
+  padding:0in;
+  mso-padding-alt:0in 0in 4.0pt 0in;
+  font-size:26.0pt;
+  font-family:"Cambria","serif";
+  mso-ascii-font-family:Cambria;
+  mso-ascii-theme-font:major-latin;
+  mso-fareast-font-family:"Times New Roman";
+  mso-fareast-theme-font:major-fareast;
+  mso-hansi-font-family:Cambria;
+  mso-hansi-theme-font:major-latin;
+  mso-bidi-font-family:"Times New Roman";
+  mso-bidi-theme-font:major-bidi;
+  color:#17365D;
+  mso-themecolor:text2;
+  mso-themeshade:191;
+  letter-spacing:.25pt;
+  mso-font-kerning:14.0pt;}
+p.MsoTitleCxSpFirst, li.MsoTitleCxSpFirst, div.MsoTitleCxSpFirst
+  {mso-style-priority:10;
+  mso-style-unhide:no;
+  mso-style-qformat:yes;
+  mso-style-link:"Title Char";
+  mso-style-next:Normal;
+  mso-style-type:export-only;
+  margin:0in;
+  margin-bottom:.0001pt;
+  mso-add-space:auto;
+  mso-pagination:widow-orphan;
+  border:none;
+  mso-border-bottom-alt:solid #4F81BD 1.0pt;
+  mso-border-bottom-themecolor:accent1;
+  padding:0in;
+  mso-padding-alt:0in 0in 4.0pt 0in;
+  font-size:26.0pt;
+  font-family:"Cambria","serif";
+  mso-ascii-font-family:Cambria;
+  mso-ascii-theme-font:major-latin;
+  mso-fareast-font-family:"Times New Roman";
+  mso-fareast-theme-font:major-fareast;
+  mso-hansi-font-family:Cambria;
+  mso-hansi-theme-font:major-latin;
+  mso-bidi-font-family:"Times New Roman";
+  mso-bidi-theme-font:major-bidi;
+  color:#17365D;
+  mso-themecolor:text2;
+  mso-themeshade:191;
+  letter-spacing:.25pt;
+  mso-font-kerning:14.0pt;}
+p.MsoTitleCxSpMiddle, li.MsoTitleCxSpMiddle, div.MsoTitleCxSpMiddle
+  {mso-style-priority:10;
+  mso-style-unhide:no;
+  mso-style-qformat:yes;
+  mso-style-link:"Title Char";
+  mso-style-next:Normal;
+  mso-style-type:export-only;
+  margin:0in;
+  margin-bottom:.0001pt;
+  mso-add-space:auto;
+  mso-pagination:widow-orphan;
+  border:none;
+  mso-border-bottom-alt:solid #4F81BD 1.0pt;
+  mso-border-bottom-themecolor:accent1;
+  padding:0in;
+  mso-padding-alt:0in 0in 4.0pt 0in;
+  font-size:26.0pt;
+  font-family:"Cambria","serif";
+  mso-ascii-font-family:Cambria;
+  mso-ascii-theme-font:major-latin;
+  mso-fareast-font-family:"Times New Roman";
+  mso-fareast-theme-font:major-fareast;
+  mso-hansi-font-family:Cambria;
+  mso-hansi-theme-font:major-latin;
+  mso-bidi-font-family:"Times New Roman";
+  mso-bidi-theme-font:major-bidi;
+  color:#17365D;
+  mso-themecolor:text2;
+  mso-themeshade:191;
+  letter-spacing:.25pt;
+  mso-font-kerning:14.0pt;}
+p.MsoTitleCxSpLast, li.MsoTitleCxSpLast, div.MsoTitleCxSpLast
+  {mso-style-priority:10;
+  mso-style-unhide:no;
+  mso-style-qformat:yes;
+  mso-style-link:"Title Char";
+  mso-style-next:Normal;
+  mso-style-type:export-only;
+  margin-top:0in;
+  margin-right:0in;
+  margin-bottom:15.0pt;
+  margin-left:0in;
+  mso-add-space:auto;
+  mso-pagination:widow-orphan;
+  border:none;
+  mso-border-bottom-alt:solid #4F81BD 1.0pt;
+  mso-border-bottom-themecolor:accent1;
+  padding:0in;
+  mso-padding-alt:0in 0in 4.0pt 0in;
+  font-size:26.0pt;
+  font-family:"Cambria","serif";
+  mso-ascii-font-family:Cambria;
+  mso-ascii-theme-font:major-latin;
+  mso-fareast-font-family:"Times New Roman";
+  mso-fareast-theme-font:major-fareast;
+  mso-hansi-font-family:Cambria;
+  mso-hansi-theme-font:major-latin;
+  mso-bidi-font-family:"Times New Roman";
+  mso-bidi-theme-font:major-bidi;
+  color:#17365D;
+  mso-themecolor:text2;
+  mso-themeshade:191;
+  letter-spacing:.25pt;
+  mso-font-kerning:14.0pt;}
+p.MsoSubtitle, li.MsoSubtitle, div.MsoSubtitle
+  {mso-style-priority:11;
+  mso-style-unhide:no;
+  mso-style-qformat:yes;
+  mso-style-link:"Subtitle Char";
+  mso-style-next:Normal;
+  margin-top:0in;
+  margin-right:0in;
+  margin-bottom:10.0pt;
+  margin-left:0in;
+  line-height:115%;
+  mso-pagination:widow-orphan;
+  font-size:12.0pt;
+  font-family:"Cambria","serif";
+  mso-ascii-font-family:Cambria;
+  mso-ascii-theme-font:major-latin;
+  mso-fareast-font-family:"Times New Roman";
+  mso-fareast-theme-font:major-fareast;
+  mso-hansi-font-family:Cambria;
+  mso-hansi-theme-font:major-latin;
+  mso-bidi-font-family:"Times New Roman";
+  mso-bidi-theme-font:major-bidi;
+  color:#4F81BD;
+  mso-themecolor:accent1;
+  letter-spacing:.75pt;
+  font-style:italic;}
+code
+  {mso-style-noshow:yes;
+  mso-style-priority:99;
+  font-family:"Courier New";
+  mso-ascii-font-family:"Courier New";
+  mso-fareast-font-family:"Times New Roman";
+  mso-hansi-font-family:"Courier New";
+  mso-bidi-font-family:"Courier New";}
+span.TitleChar
+  {mso-style-name:"Title Char";
+  mso-style-priority:10;
+  mso-style-unhide:no;
+  mso-style-locked:yes;
+  mso-style-link:Title;
+  mso-ansi-font-size:26.0pt;
+  mso-bidi-font-size:26.0pt;
+  font-family:"Cambria","serif";
+  mso-ascii-font-family:Cambria;
+  mso-ascii-theme-font:major-latin;
+  mso-fareast-font-family:"Times New Roman";
+  mso-fareast-theme-font:major-fareast;
+  mso-hansi-font-family:Cambria;
+  mso-hansi-theme-font:major-latin;
+  mso-bidi-font-family:"Times New Roman";
+  mso-bidi-theme-font:major-bidi;
+  color:#17365D;
+  mso-themecolor:text2;
+  mso-themeshade:191;
+  letter-spacing:.25pt;
+  mso-font-kerning:14.0pt;}
+span.SubtitleChar
+  {mso-style-name:"Subtitle Char";
+  mso-style-priority:11;
+  mso-style-unhide:no;
+  mso-style-locked:yes;
+  mso-style-link:Subtitle;
+  mso-ansi-font-size:12.0pt;
+  mso-bidi-font-size:12.0pt;
+  font-family:"Cambria","serif";
+  mso-ascii-font-family:Cambria;
+  mso-ascii-theme-font:major-latin;
+  mso-fareast-font-family:"Times New Roman";
+  mso-fareast-theme-font:major-fareast;
+  mso-hansi-font-family:Cambria;
+  mso-hansi-theme-font:major-latin;
+  mso-bidi-font-family:"Times New Roman";
+  mso-bidi-theme-font:major-bidi;
+  color:#4F81BD;
+  mso-themecolor:accent1;
+  letter-spacing:.75pt;
+  font-style:italic;}
+.MsoChpDefault
+  {mso-style-type:export-only;
+  mso-default-props:yes;
+  mso-ascii-font-family:Calibri;
+  mso-ascii-theme-font:minor-latin;
+  mso-fareast-font-family:Calibri;
+  mso-fareast-theme-font:minor-latin;
+  mso-hansi-font-family:Calibri;
+  mso-hansi-theme-font:minor-latin;
+  mso-bidi-font-family:"Times New Roman";
+  mso-bidi-theme-font:minor-bidi;}
+.MsoPapDefault
+  {mso-style-type:export-only;
+  margin-bottom:10.0pt;
+  line-height:115%;}
+@page Section1
+  {size:8.5in 11.0in;
+  margin:1.0in 1.0in 1.0in 1.0in;
+  mso-header-margin:.5in;
+  mso-footer-margin:.5in;
+  mso-paper-source:0;}
+div.Section1
+  {page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+  {mso-style-name:"Table Normal";
+  mso-tstyle-rowband-size:0;
+  mso-tstyle-colband-size:0;
+  mso-style-noshow:yes;
+  mso-style-priority:99;
+  mso-style-qformat:yes;
+  mso-style-parent:"";
+  mso-padding-alt:0in 5.4pt 0in 5.4pt;
+  mso-para-margin-top:0in;
+  mso-para-margin-right:0in;
+  mso-para-margin-bottom:10.0pt;
+  mso-para-margin-left:0in;
+  line-height:115%;
+  mso-pagination:widow-orphan;
+  font-size:11.0pt;
+  font-family:"Calibri","sans-serif";
+  mso-ascii-font-family:Calibri;
+  mso-ascii-theme-font:minor-latin;
+  mso-hansi-font-family:Calibri;
+  mso-hansi-theme-font:minor-latin;
+  mso-bidi-font-family:"Times New Roman";
+  mso-bidi-theme-font:minor-bidi;}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="2050"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-US style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<div style='mso-element:para-border-div;border-top:none;border-left:solid windowtext 1.0pt;
+border-bottom:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;
+border-right:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
+solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;padding:0in 0in 4.0pt 4.0pt'>
+
+<p class=MsoTitle style='border:none;mso-border-left-alt:solid windowtext .5pt;
+mso-border-bottom-alt:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;
+padding:0in;mso-padding-alt:0in 0in 4.0pt 4.0pt'>C Programming Practice</p>
+
+</div>
+
+<p class=MsoSubtitle>A list of exercises for C programming language.</p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;font-family:"Open Sans","sans-serif";
+mso-fareast-font-family:"Times New Roman";color:black;background:white'>Predict
+the output of following program?</span><span style='font-size:12.0pt;
+font-family:"Times New Roman","serif";mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width=590
+ style='width:442.5pt;border-collapse:collapse;mso-yfti-tbllook:1184;
+ mso-padding-alt:0in 0in 0in 0in'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes'>
+  <td width=590 style='width:442.5pt;padding:0in 0in 0in 0in'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+  "Courier New";mso-fareast-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+  "Courier New";mso-fareast-font-family:"Times New Roman"'>#include
+  &quot;stdio.h&quot;</span><span style='font-size:12.0pt;font-family:"Times New Roman","serif";
+  mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+  "Courier New";mso-fareast-font-family:"Times New Roman"'>int</span><span
+  style='font-size:12.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
+  "Times New Roman"'> </span><span style='font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;font-family:"Courier New";mso-fareast-font-family:"Times New Roman"'>main()</span><span
+  style='font-size:12.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+  "Courier New";mso-fareast-font-family:"Times New Roman"'>{</span><span
+  style='font-size:12.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+  "Courier New";mso-fareast-font-family:"Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;char</span><span
+  style='font-size:12.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
+  "Times New Roman"'> </span><span style='font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;font-family:"Courier New";mso-fareast-font-family:"Times New Roman"'>arr[100];</span><span
+  style='font-size:12.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+  "Courier New";mso-fareast-font-family:"Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;printf(&quot;%d&quot;,
+  scanf(&quot;%s&quot;, arr));</span><span style='font-size:12.0pt;font-family:
+  "Times New Roman","serif";mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+  "Courier New";mso-fareast-font-family:"Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;/*
+  Suppose that input value given</span><span style='font-size:12.0pt;
+  font-family:"Times New Roman","serif";mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+  "Courier New";mso-fareast-font-family:"Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for
+  above scanf is &quot;GeeksQuiz&quot; */</span><span style='font-size:12.0pt;
+  font-family:"Times New Roman","serif";mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+  "Courier New";mso-fareast-font-family:"Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;return</span><span
+  style='font-size:12.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
+  "Times New Roman"'> </span><span style='font-size:10.0pt;mso-bidi-font-size:
+  11.0pt;font-family:"Courier New";mso-fareast-font-family:"Times New Roman"'>1;</span><span
+  style='font-size:12.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+  "Courier New";mso-fareast-font-family:"Times New Roman"'>}</span><span
+  style='font-size:12.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>#include
+&lt;stdio.h&gt;</span><span style='font-size:10.0pt;font-family:Consolas;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>int</span><span
+style='font-size:10.0pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
+color:black'> </span><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;
+font-family:"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>main()</span><span
+style='font-size:10.0pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
+color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>{</span><span
+style='font-size:10.0pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
+color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>&nbsp;&nbsp;&nbsp;printf(&quot;\new_c_question\by&quot;);</span><span
+style='font-size:10.0pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
+color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>&nbsp;&nbsp;&nbsp;printf(&quot;\rgeeksforgeeks&quot;);
+</span><span style='font-size:10.0pt;font-family:Consolas;mso-fareast-font-family:
+"Times New Roman";color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>&nbsp;&nbsp;&nbsp;getchar();</span><span
+style='font-size:10.0pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
+color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>&nbsp;&nbsp;&nbsp;return</span><span
+style='font-size:10.0pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
+color:black'> </span><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;
+font-family:"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>0;</span><span
+style='font-size:10.0pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
+color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>}</span><span
+style='font-size:10.0pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
+color:black'><o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>#include
+&lt;stdio.h&gt;</span><span style='font-size:10.0pt;font-family:"Times New Roman","serif";
+mso-fareast-font-family:"Times New Roman";color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;font-family:"Times New Roman","serif";
+mso-fareast-font-family:"Times New Roman";color:black'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>int</span><span
+style='font-size:10.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
+"Times New Roman";color:black'> </span><span style='font-size:10.0pt;
+mso-bidi-font-size:11.0pt;font-family:"Courier New";mso-fareast-font-family:
+"Times New Roman";color:black'>main() </span><span style='font-size:10.0pt;
+font-family:"Times New Roman","serif";mso-fareast-font-family:"Times New Roman";
+color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>{ </span><span
+style='font-size:10.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
+"Times New Roman";color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>&nbsp;&nbsp;printf(&quot;
+\&quot;GEEKS %% FOR %% GEEKS\&quot;&quot;); </span><span style='font-size:10.0pt;
+font-family:"Times New Roman","serif";mso-fareast-font-family:"Times New Roman";
+color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>&nbsp;&nbsp;getchar();
+</span><span style='font-size:10.0pt;font-family:"Times New Roman","serif";
+mso-fareast-font-family:"Times New Roman";color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>&nbsp;&nbsp;return</span><span
+style='font-size:10.0pt;font-family:"Times New Roman","serif";mso-fareast-font-family:
+"Times New Roman";color:black'> </span><span style='font-size:10.0pt;
+mso-bidi-font-size:11.0pt;font-family:"Courier New";mso-fareast-font-family:
+"Times New Roman";color:black'>0; </span><span style='font-size:10.0pt;
+font-family:"Times New Roman","serif";mso-fareast-font-family:"Times New Roman";
+color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;
+line-height:115%;font-family:"Courier New";mso-fareast-font-family:"Times New Roman";
+color:black'>}<o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>#include
+&lt;stdio.h&gt;</span><span style='font-size:10.0pt;font-family:Consolas;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>// Assume
+base address of &quot;GeeksQuiz&quot; to be 1000</span><span style='font-size:
+10.0pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
+color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>int</span><span
+style='font-size:10.0pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
+color:black'> </span><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;
+font-family:"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>main()</span><span
+style='font-size:10.0pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
+color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>{</span><span
+style='font-size:10.0pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
+color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>&nbsp;&nbsp;&nbsp;printf(5
++ &quot;GeeksQuiz&quot;);</span><span style='font-size:10.0pt;font-family:Consolas;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>&nbsp;&nbsp;&nbsp;return</span><span
+style='font-size:10.0pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
+color:black'> </span><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;
+font-family:"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>0;</span><span
+style='font-size:10.0pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
+color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span style='font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:
+"Courier New";mso-fareast-font-family:"Times New Roman";color:black'>}</span><span
+style='font-size:10.0pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
+color:black'><o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+</div>
+
+</body>
+
+</html>
+
 
   </div>
 </div>
