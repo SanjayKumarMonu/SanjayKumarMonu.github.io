@@ -27,8 +27,5 @@ html{
 	padding-bottom: 5%;
 	padding-right: 5%
 	padding-left: 5%;
-    -webkit-column-count: 2; /* Chrome, Safari, Opera */
-    -moz-column-count: 2; /* Firefox */
-    column-count: 2;
 }
 }
